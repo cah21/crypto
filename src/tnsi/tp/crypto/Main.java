@@ -86,6 +86,15 @@ public class Main {
 //			  System.out.print(occ[i]+"\t");
 //			  System.out.println();
 //		  }
+		  
+		  System.out.println("*************RSA******************");
+		  RSA rsa=new RSA();
+		  int[]result=rsa.algoEuclide(20,7);
+		  int premier=rsa.getNombrePremierIn(1, 85);
+		  System.out.println("pgcd(a,b)="+ premier);
+		  System.out.println("pgcd(a,b)="+result[0]);
+		  System.out.println("u ="+result[1]);
+		  System.out.println("v ="+result[2]);
 		 
 		 
         
