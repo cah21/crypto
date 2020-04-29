@@ -89,12 +89,29 @@ public class Main {
 		  
 		  System.out.println("*************RSA******************");
 		  RSA rsa=new RSA();
-		  int[]result=rsa.algoEuclide(20,7);
+		  
+		  System.out.println("---test nombre premier----");
 		  int premier=rsa.getNombrePremierIn(1, 85);
-		  System.out.println("pgcd(a,b)="+ premier);
-		  System.out.println("pgcd(a,b)="+result[0]);
+		  System.out.println("nbr premier entre(1,85) =" + premier);
+		  System.out.println("------RSA------");
+		  int m = 10; // message claire
+		  int p = 5, q = 17, n = p * q, e = 5; 
+		  //on va crypter le message m = 10;
+		  // on choisi e tel que pgcd(e,phi) = 1
+		  double messagecryp=rsa.chiffrement(m, n, e);
+		  System.out.println("Message crypte: "+ messagecryp);
+		  //on va maintenant dechiffrer messagecryp avec cle prive
+		  int phi=(p-1)*(q-1);
+		  int[]result=rsa.algoEuclide(e,phi);
+		  System.out.println("---algo euclide----");
+		  System.out.println("pgcd("+e+","+phi+")="+result[0]);
 		  System.out.println("u ="+result[1]);
 		  System.out.println("v ="+result[2]);
+		  int privateKey= rsa.getClePrive(p,q,e);
+		  double messagedecryp=rsa.dechiffrement(messagecryp, n, privateKey);
+		  System.out.println("Private key: "+privateKey);
+		  System.out.println("Message decrypte: "+messagedecryp);
+		  
 		 
 		 
         

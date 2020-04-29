@@ -13,7 +13,7 @@ public class RSA {
 		// ind[1]= u coefficient de bezout
 		//ind[2]= v coefficient de bezout
 		int r = a , u = 1, v = 0, r1 = b, u1 = 0, v1 = 1, q, r3 ,u3 ,v3;
-		
+		if(a<b) {a=b ; b=a;}
 		if(a>=b & b>0) {
 			
 			while(r1 != 0) {
@@ -28,8 +28,6 @@ public class RSA {
 			result[0]=r;
 			result[1]=u;
 			result[2]=v;
-		}else {
-			throw new Exception("a doit etre superieur ou egal a b et b positif");
 		}
 		
 		return result;
@@ -71,29 +69,26 @@ public class RSA {
 	
 	
 	
-	public int getClePrive() {
-		int result=0;
-		return result;
+
+	
+	public double  chiffrement(int message,int n,int e) {
+		
+		return  Math.pow(message, e) % n;
 	}
 	
-	public int  chiffrement(int message,int n,int e) {
+	public double  dechiffrement(double messageCryp,int n,int d) {
 		
-		return (int) Math.pow(message, e) % n;
-	}
-	
-	public int  dechiffrement(int messageCryp,int n,int d) {
-		
-		return (int) Math.pow(messageCryp, d) % n;
+		return  Math.pow(messageCryp, d) % n;
 	}
 	
 	
 	//calcul de d l'inverse e mod(phi)
 	public int getClePrive(int p, int q,int e) throws Exception {
 		int phi = (p - 1) * (q -1);
-		int[] euclide=this.algoEuclide(e, phi);
+		int[] euclide=this.algoEuclide(e,phi);
 		// a*u+ b*v=pgcd euclide[0]= pgcd  euclide[1]= u  euclide[2]= v
 		// ici e*u + phi*v = 1 => d=u donc euclide[1]
 		int d = euclide[1];
-		return d;
+		return d%phi;
 	}
 }
